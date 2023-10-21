@@ -36,4 +36,4 @@ jobs:
           AWS_REGION: ${{ secrets.REGION }}
           S3_URI: ${{ secrets.S3_URI }}
         run: |
-          aws s3 sync public/ $S3_URI --endpoint-url https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com/ --size-only --only-show-errors
+          aws s3 sync dist/ $S3_URI --endpoint-url https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com/ --size-only --only-show-errors
