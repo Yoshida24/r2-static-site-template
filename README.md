@@ -1,1 +1,1 @@
-# r2-static-site-template
+# r2-statik-site-template
