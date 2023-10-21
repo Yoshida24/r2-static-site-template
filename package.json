@@ -1,10 +1,24 @@
 {
   "name": "r2-static-site-template",
   "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yoshida24/r2-static-site-template/issues"
+  },
+  "homepage": "https://github.com/Yoshida24/r2-static-site-template#readme",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
   "scripts": {
-    "build": "echo build executed.",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "test": "echo test executed.",
     "deploy": "sh ./scripts/deploy.sh"
   },
@@ -12,10 +26,12 @@
     "type": "git",
     "url": "git+https://github.com/Yoshida24/r2-static-site-template.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Yoshida24/r2-static-site-template/issues"
+  "dependencies": {
+    "preact": "10.16.0"
   },
-  "homepage": "https://github.com/Yoshida24/r2-static-site-template#readme"
+  "devDependencies": {
+    "@preact/preset-vite": "2.5.0",
+    "typescript": "5.0.2",
+    "vite": "4.4.5"
+  }
 }
