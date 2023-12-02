@@ -13,6 +13,11 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: linux/arm64
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -28,6 +33,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug Directory
+        run: |
+          echo "Directory: $(pwd)" && echo "Contents: $(ls -la)" && echo "Dist: $(ls -la dist)"
+
       - name: Upload to R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
@@ -36,4 +45,4 @@ jobs:
           AWS_REGION: ${{ secrets.REGION }}
           S3_URI: ${{ secrets.S3_URI }}
         run: |
-          aws s3 sync dist/ $S3_URI --endpoint-url https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com/ --size-only --only-show-errors
+          AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION=$AWS_REGION aws s3 sync dist/ $S3_URI --endpoint-url https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com/ --size-only --only-show-errors --exact-timestamps --delete
